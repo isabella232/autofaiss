@@ -325,7 +325,6 @@ def run(
     trained_index_bytes = get_bytes_from_index(faiss_index)
     broadcast_trained_index_bytes = ss.sparkContext.broadcast(trained_index_bytes)
     nb_vectors = sum(file_counts)
-    batch_size = 10000
     nb_batches = math.ceil(nb_vectors / batch_size)  # use math.ceil to make sure that we cover every vector
     batches = _batch_loader(batch_size=batch_size, nb_batches=nb_batches)
     rdd = ss.sparkContext.parallelize(batches, nb_batches)
